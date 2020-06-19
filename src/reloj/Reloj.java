@@ -10,59 +10,52 @@ import javax.swing.JTextField;
  * @author gabrielhs
  */
 public class Reloj extends Thread{
-private JTextField txt;
-boolean isRun;
-int min=1,seg=1;
-long time,s;
-//Thread segundo;
-
-public synchronized void detener(){
-    isRun=false;
-}
-
-    public Reloj(long time,JTextField txt) {
-        this.time=time;
-        this.txt=txt;
+ 
+    private JTextField txt_seg;
+    private JTextField txt_min;
+    private boolean isRun = false;
+//    private int contador=1; 
+    long s,m;
+    public Reloj (JTextField txt_seg, JTextField txt_min){
+        this.txt_seg = txt_seg;
+        this.txt_min = txt_min;
     }
-
+    
+    public synchronized void detener(){
+        isRun=false;
+    }
 
     @Override
     public void run() {
-        
-      isRun=true;
+        isRun = true;
+        m = 0;
         while(isRun){
             
-       //min=-1;
-//            txt.setText(String.valueOf(min));
-            while(min<59){
-            s=-1;
-            txt.setText(String.valueOf(s));
-            while(s<59){
-            // 59 ta bien
-            s= Long.parseLong(txt.getText());
-            
-            s++;
-           
-            txt.setText(String.valueOf(s));
-            
+//            while(contador<60){
             try {
-               
-                Thread.sleep(time);
-              
+                s = Long.parseLong(txt_seg.getText());
+                s++;
+                if (s == 60) {
+                    s = 0;
+                    m++;
+                    txt_min.setText(String.valueOf(m));
+                }
                 
+                txt_seg.setText(String.valueOf(s));
+                Thread.sleep(1000);
+            
             } catch (InterruptedException ex) {
                 Logger.getLogger(Reloj.class.getName()).log(Level.SEVERE, null, ex);
             }
-        //seg++;
-            }
-        
-        min++;
-            }
-        
-        
+//            contador++;
+//            }
+//            contador=1;
+//            s=0;
+//            m=0;
+//            txt_min.setText(String.valueOf(m));
+//            txt_seg.setText(String.valueOf(s));
         }
-            
-            
+        
     }
 
   

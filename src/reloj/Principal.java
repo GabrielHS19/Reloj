@@ -6,17 +6,13 @@ package reloj;
  */
 public class Principal extends javax.swing.JFrame {
 
-    private Reloj min = null;
-    private Reloj seg = null;
+    private Reloj reloj;
 
-    /**
-     * Creates new form Principal
-     */
+    
     public Principal() {
         initComponents();
-        seg = new Reloj(1000, segundos);
-        min = new Reloj(61000, minutos);
-//aqui van 61000 creo
+        reloj=new Reloj(segundos, minutos);
+
     }
 
     /**
@@ -90,15 +86,13 @@ public class Principal extends javax.swing.JFrame {
 
     private void detenerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detenerActionPerformed
 
-        seg.detener();
-        min.detener();
+        reloj.detener();
 
     }//GEN-LAST:event_detenerActionPerformed
 
     private void iniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarActionPerformed
 
-        seg.start();
-        min.start();
+       reloj.start();
 
     }//GEN-LAST:event_iniciarActionPerformed
 
